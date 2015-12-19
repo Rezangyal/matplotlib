@@ -993,9 +993,10 @@ class Line2D(Artist):
         ===========================   =================
         ``'-'`` or ``'solid'``        solid line
         ``'--'`` or  ``'dashed'``     dashed line
-        ``'-.'`` or  ``'dash_dot'``   dash-dotted line
+        ``'-.'`` or  ``'dashdot'``    dash-dotted line
         ``':'`` or ``'dotted'``       dotted line
         ``'None'``                    draw nothing
+        ``'none'``                    draw nothing
         ``' '``                       draw nothing
         ``''``                        draw nothing
         ===========================   =================
@@ -1013,8 +1014,8 @@ class Line2D(Artist):
 
         ACCEPTS: ['solid' | 'dashed', 'dashdot', 'dotted' |
                    (offset, on-off-dash-seq) |
-                   ``'-'`` | ``'--'`` | ``'-.'`` | ``':'`` | ``'None'`` |
-                   ``' '`` | ``''``]
+                   ``'-'`` | ``'--'`` | ``'-.'`` | ``':'`` | 
+                   ``'None'`` | ``'none'`` | ``' '`` | ``''``]
 
         .. seealso::
 
