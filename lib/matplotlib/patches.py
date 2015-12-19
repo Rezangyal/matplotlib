@@ -370,8 +370,12 @@ class Patch(artist.Artist):
         ===========================   =================
         ``'-'`` or ``'solid'``        solid line
         ``'--'`` or  ``'dashed'``     dashed line
-        ``'-.'`` or  ``'dash_dot'``   dash-dotted line
+        ``'-.'`` or  ``'dashdot'``    dash-dotted line
         ``':'`` or ``'dotted'``       dotted line
+        ``'None'``                    draw nothing
+        ``'none'``                    draw nothing
+        ``' '``                       draw nothing
+        ``''``                        draw nothing
         ===========================   =================
 
         Alternatively a dash tuple of the following form can be provided::
@@ -383,8 +387,8 @@ class Patch(artist.Artist):
 
         ACCEPTS: ['solid' | 'dashed', 'dashdot', 'dotted' |
                    (offset, on-off-dash-seq) |
-                   ``'-'`` | ``'--'`` | ``'-.'`` | ``':'`` | ``'None'`` |
-                   ``' '`` | ``''``]
+                   ``'-'`` | ``'--'`` | ``'-.'`` | ``':'`` | 
+                   ``'None'`` | ``'none'`` | ``' '`` | ``''``]
 
         Parameters
         ----------
@@ -499,11 +503,14 @@ class Patch(artist.Artist):
 
         gc.set_foreground(self._edgecolor, isRGBA=True)
 
-        lw = self._linewidth
-        if self._edgecolor[3] == 0:
-            lw = 0
-        gc.set_linewidth(lw)
-        gc.set_linestyle(self._linestyle)
+        if (self._edgecolor[3] == 0 or 
+            self._linestyle in {'none', 'None', ' ', ''}):
+            # (some?) renderers expect this as no-edge signal
+            gc.set_linewidth(0.0)  
+        else:
+            gc.set_linewidth(self._linewidth)
+            gc.set_linestyle(self._linestyle)
+
         gc.set_capstyle(self._capstyle)
         gc.set_joinstyle(self._joinstyle)
 
